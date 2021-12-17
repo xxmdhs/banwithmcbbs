@@ -1,6 +1,7 @@
-name: ipsave
+name: banwithmcbbs
 main: top.xmdhs.banwithmcbbs.Main
 api-version: 1.13
 version: 0.0.1
 author: xmdhs
-softdepend: [ BBSToper ]
+depend:
+  - BBSToper
