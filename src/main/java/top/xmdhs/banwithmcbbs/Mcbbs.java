@@ -1,14 +1,13 @@
 package top.xmdhs.banwithmcbbs;
 
 import com.google.gson.Gson;
-import org.bukkit.Bukkit;
-import org.bukkit.plugin.Plugin;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 public class Mcbbs {
@@ -17,13 +16,8 @@ public class Mcbbs {
     }
 
 
-    @FunctionalInterface
-    interface isBanedCallback {
-        void callback(boolean t, Exception err);
-    }
-
     public boolean isBaned(String bbsName) throws IOException {
-        String s = httpGet("https://www.mcbbs.net/api/mobile/index.php?version=4&module=profile&username=" + bbsName);
+        String s = httpGet("https://www.mcbbs.net/api/mobile/index.php?version=4&module=profile&username=" + URLEncoder.encode(bbsName,"UTF-8"));
         Gson gson = new Gson();
         uidapi u = gson.fromJson(s, uidapi.class);
         int id = u.Variables.space.groupid;
