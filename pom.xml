@@ -80,8 +80,8 @@
                     </transformers>
                     <relocations>
                         <relocation>
-                            <pattern>com.google.code.gson</pattern>
-                            <shadedPattern>top.xmdhs.com.google</shadedPattern>
+                            <pattern>com.google.gson</pattern>
+                            <shadedPattern>top.xmdhs.com.google.gson</shadedPattern>
                         </relocation>
                     </relocations>
                 </configuration>
