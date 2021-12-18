@@ -19,6 +19,7 @@ jobs:
 
     - name: download lib
       run : |
+        mkdir -p ./libs
         wget https://github.com/R-Josef/BBSToper/releases/download/3.6.7/BBSToper-3.6.7.jar -o ./libs/BBSToper-3.6.7.jar
 
     - name: Set up JDK 1.8
