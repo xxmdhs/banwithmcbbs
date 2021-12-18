@@ -4,13 +4,15 @@ import moe.feo.bbstoper.Poster;
 import moe.feo.bbstoper.sql.SQLManager;
 import org.bukkit.entity.Player;
 
+import java.util.UUID;
+
 public class Data {
 
     public Data() {
     }
 
-    public String getPlayerBBsName(Player p){
-        Poster poster = SQLManager.sql.getPoster(p.getUniqueId().toString());
+    public String getPlayerBBsName(UUID u){
+        Poster poster = SQLManager.sql.getPoster(u.toString());
         if (poster == null){
             return null;
         }

@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.Plugin;
 
@@ -24,19 +25,27 @@ public class OnJoin implements Listener {
     }
 
     @EventHandler
+    public void onAsyncPlayerPreLoginEvent(AsyncPlayerPreLoginEvent e){
+        String s = d.getPlayerBBsName(e.getUniqueId());
+        if (s == null) {
+            return;
+        }
+        PlayerInfo pi = map.get(s);
+        if (pi != null) {
+            long nowTime = new Date().getTime();
+            if (nowTime - pi.time < 1200000 && pi.isBaned) {
+                e.disallow(AsyncPlayerPreLoginEvent.Result.KICK_BANNED,"已被 mcbbs 封禁");
+            }
+        }
+    }
+
+
+    @EventHandler
     public void onPlayerJoinEvent(PlayerJoinEvent e) {
         Bukkit.getScheduler().runTaskAsynchronously(p, () -> {
-            String s = d.getPlayerBBsName(e.getPlayer());
+            String s = d.getPlayerBBsName(e.getPlayer().getUniqueId());
             if (s == null) {
                 return;
-            }
-            PlayerInfo pi = map.get(s);
-            if (pi != null) {
-                long nowTime = new Date().getTime();
-                if (nowTime - pi.time < 1200000 && pi.isBaned) {
-                    kickPlayer(e.getPlayer());
-                    return;
-                }
             }
             boolean b;
             try {
