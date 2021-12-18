@@ -22,6 +22,8 @@ jobs:
         mkdir -p ./libs
         wget https://github.com/R-Josef/BBSToper/releases/download/3.6.7/BBSToper-3.6.7.jar -o ./libs/BBSToper-3.6.7.jar
         chmod 777 ./libs/BBSToper-3.6.7.jar
+        pwd
+        tree -a
 
     - name: Set up JDK 1.8
       uses: actions/setup-java@v1
